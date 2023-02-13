@@ -5,7 +5,7 @@ dizelFiyat = 5.86
 
 ortalamaYakitTuketimi_L = float(input("100 km deki ortalama yakıt tüketiminiz: "))
 gidilecekYol_Km = float(input("gidilecek yok kaç km: "))
-yakitTipi = input("yakıt tipiniz nedir(dizel/benzin): ")
+yakitTipi = input("yakıt tipiniz nedir(dizel/benzin): ") 
 
 
 toplamYakitTuketimi = gidilecekYol_Km * (ortalamaYakitTuketimi_L / 100)
