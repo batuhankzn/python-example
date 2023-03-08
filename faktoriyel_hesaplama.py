@@ -5,3 +5,8 @@ def faktoriyel(x):
         return 1
     
     return x* faktoriyel(x-1)
+
+
+sonuc = faktoriyel(5)
+
+print(sonuc)
