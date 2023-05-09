@@ -1,4 +1,11 @@
 # Görselden Arkaplan Kaldırma
+
+## Gereksinimler
+
 ***python: >3.7, <3.11***
 
-> [Kaynak:](https://github.com/danielgatis/rembg/) https://github.com/danielgatis/rembg
+GPU Support:
+https://onnxruntime.ai 
+> pip install rembg[gpu]
+
+[Kaynak:](https://github.com/danielgatis/rembg/) https://github.com/danielgatis/rembg
