@@ -1,5 +1,6 @@
 import turtle
 import random
+import time
 
 board = turtle.Screen()
 bg_color = turtle.bgcolor("gray")
@@ -77,11 +78,31 @@ def show_turtles():
     turtle.ontimer(show_turtles,500)
 
 
+#countdown turtle
+
+countdown_turtle = turtle.Turtle()
+
+def countdown(t):
+    countdown_turtle.penup()
+    countdown_turtle.hideturtle()
+    countdown_turtle.setpos(0,350)
+    
+    if t > 0:
+        while t >= 0:
+            countdown_turtle.clear()
+            countdown_turtle.write(arg=f"Time: {t}", move=False, align="center", font=FONT)
+            t -= 1
+            time.sleep(1)
+    else:
+        countdown_turtle.write(arg=f"Game Over!", move=False, align="center", font=FONT)
+        hide_turtles()
+
+
+
 
 
 #fonctions 
 turtle.tracer(0)
-
 
 setup_turtles()
 setup_score_turtle()
@@ -89,7 +110,9 @@ hide_turtles()
 show_turtles()
 
 
-
 turtle.tracer(1)
+
+countdown(3)
+
 gameBoard_setup()
 turtle.mainloop()
