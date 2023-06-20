@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
-#from cryptography.fernet import Fernet
+import base64
 
 
 #UI
@@ -25,17 +25,54 @@ def save_and_encrypt():
     message = text_message.get("1.0", END)
     master_secret = entry_key.get()
 
+    crypted = encode(master_secret,message)
+
     if len(title) == 0 or len(message) == 0 or len(master_secret) == 0:
         messagebox.showwarning("Warning","Please enter all info")
     else:
-        #encryp
+        try:
+            with open(f"{title}.txt","a") as datafile:
+                datafile.write(f"{crypted}")
+        except FileNotFoundError:
+            with open(f"{title}.txt","w") as datafile:
+                datafile.write(f"{crypted}")
+        finally:
+            entry_title.delete(0,END)
+            text_message.delete(1.0,END)
+            entry_key.delete(0,END)
 
-        with open("secret.txt","a") as datafile:
-            datafile.write(f"{text_message}")
+def decrypt_notes():
+    message = text_message.get("1.0", END)
+    master_secret = entry_key.get()
+
+    if len(message) == 0 or len(master_secret) == 0:
+        messagebox.showwarning("Warning","Please enter all info")
+    else:
+        try:
+            decrypted_message = decode(master_secret,message)
+            text_message.delete(1.0,END)
+            text_message.insert(1.0,decrypted_message)
+        except:
+            messagebox.showwarning("Warning","Please enter encrypted text!")
 
 
+#encrypt and decrypt
+def encode(key, clear):
+    enc = []
+    for i in range(len(clear)):
+        key_c = key[i % len(key)]
+        enc_c = chr((ord(clear[i]) + ord(key_c)) % 256)
+        enc.append(enc_c)
+    return base64.urlsafe_b64encode("".join(enc).encode()).decode()
 
-
+def decode(key, enc):
+    dec = []
+    enc = base64.urlsafe_b64decode(enc).decode()
+    for i in range(len(enc)):
+        key_c = key[i % len(key)]
+        dec_c = chr((256 + ord(enc[i]) - ord(key_c)) % 256)
+        dec.append(dec_c)
+    return "".join(dec)
 
 
 title = Label(text="Enter Your Title", font=FONT)
@@ -59,7 +96,7 @@ entry_key.pack()
 save_button = Button(text="Save & Encrypt", command=save_and_encrypt)
 save_button.pack()
 
-decrypt_button = Button(text="Decrypt")
+decrypt_button = Button(text="Decrypt", command=decrypt_notes)
 decrypt_button.pack()
 
 screen.mainloop()
