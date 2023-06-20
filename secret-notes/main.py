@@ -16,7 +16,7 @@ image1 = Image.open("topsecret.png")
 topsecret = ImageTk.PhotoImage(image1)
 label1 = Label(image=topsecret)
 label1.image = topsecret
-label1.config(width=1000,height=150)
+label1.config(width=600,height=150)
 label1.pack()
 
 
@@ -84,7 +84,7 @@ entry_title.pack()
 message = Label(text="Enter Your Message",font=FONT)
 message.pack()
 
-text_message = Text()
+text_message = Text(height=20)
 text_message.pack()
 
 key = Label(text="Enter Your Master Key",font=FONT)
