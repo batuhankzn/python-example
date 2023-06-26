@@ -1,0 +1,13 @@
+test
+admin
+photos
+live
+photos
+images
+drive
+cloud
+business
+shopping
+chat
+video
+docs
